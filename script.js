@@ -82,10 +82,12 @@
       }
 
       var endpoint = form.getAttribute('action') || '';
+      var keyField = form.querySelector('[name="access_key"]');
+      var accessKey = keyField ? keyField.value : '';
 
-      // Fallback: if no real endpoint is configured yet, open a pre-filled
-      // email so the button still does something useful.
-      if (!endpoint || endpoint === '#' || endpoint.indexOf('YOUR_FORM_ID') !== -1) {
+      // Fallback: if the Web3Forms access key hasn't been set yet, open a
+      // pre-filled email so the button still does something useful.
+      if (!endpoint || endpoint === '#' || !accessKey || accessKey.indexOf('YOUR_ACCESS_KEY') !== -1) {
         var d = new FormData(form);
         var subject = 'New inquiry from ' + (d.get('name') || 'website');
         var body =
@@ -114,11 +116,17 @@
         headers: { Accept: 'application/json' }
       })
       .then(function (res) {
-        if (res.ok) {
+        return res.json().then(function (data) {
+          return { ok: res.ok, data: data };
+        });
+      })
+      .then(function (r) {
+        if (r.ok && r.data && r.data.success) {
           form.reset();
           setStatus('Thanks — your inquiry has been sent. We\u2019ll reply within one business day.', 'ok');
         } else {
-          setStatus('Something went wrong. Please email info@rambridgeconsulting.com instead.', 'err');
+          var msg = (r.data && r.data.message) ? r.data.message : 'Please email info@rambridgeconsulting.com instead.';
+          setStatus('Something went wrong: ' + msg, 'err');
         }
       })
       .catch(function () {
