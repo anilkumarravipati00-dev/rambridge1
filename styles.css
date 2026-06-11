@@ -231,3 +231,9 @@
   .rb-grid-3,.rb-steps,.rb-quotes,.rb-ind,.rb-fields{grid-template-columns:1fr}
   .rb-hero-media img{height:340px}
 }
+
+/* ====================== CONTACT FORM STATUS ====================== */
+.rb-site .rb-form-status{margin-top:14px;font-weight:600;font-size:.92rem;line-height:1.5;min-height:1.2em}
+.rb-site .rb-form-status--ok{color:var(--teal)}
+.rb-site .rb-form-status--err{color:#dc2626}
+.rb-site .rb-form button[disabled]{opacity:.65;cursor:progress;transform:none}
