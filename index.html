@@ -233,7 +233,7 @@
           • Set action="https://your-handler" method="post" and handle server-side, or
           • In WordPress, paste a Contact Form 7 / WPForms / Fluent Forms shortcode here.
         -->
-        <form class="rb-form rb-reveal" action="#" method="post">
+        <form class="rb-form rb-reveal" id="rbForm" action="https://formspree.io/f/YOUR_FORM_ID" method="post">
           <div class="rb-fields">
             <div class="rb-field"><label>Name</label><input type="text" name="name" placeholder="Jane Doe" required></div>
             <div class="rb-field"><label>Company</label><input type="text" name="company" placeholder="Acme Inc."></div>
@@ -249,6 +249,7 @@
             <div class="rb-field rb-full"><label>Message</label><textarea name="message" placeholder="Tell us about the roles, stack, and timeline…"></textarea></div>
           </div>
           <button type="submit" class="rb-btn rb-btn--primary">Send Inquiry →</button>
+          <p class="rb-form-status" id="rbFormStatus" role="status" aria-live="polite"></p>
         </form>
         <div class="rb-info rb-reveal">
           <div class="rb-info-card"><div class="rb-card-ico">✉</div><div><b>Email</b><a href="mailto:info@rambridgeconsulting.com">info@rambridgeconsulting.com</a></div></div>
