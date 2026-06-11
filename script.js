@@ -58,4 +58,75 @@
 
   var band = root.querySelector('.rb-stats');
   if (band) cio.observe(band);
+
+  /* ---------- contact form ---------- */
+  var form   = root.querySelector('#rbForm'),
+      status = root.querySelector('#rbFormStatus');
+
+  if (form) {
+    var btn = form.querySelector('button[type="submit"]');
+
+    function setStatus(msg, kind) {
+      if (!status) return;
+      status.textContent = msg;
+      status.className = 'rb-form-status' + (kind ? ' rb-form-status--' + kind : '');
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault(); // stop the default no-op submit to "#"
+
+      // Native HTML5 validation (required name + email).
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      var endpoint = form.getAttribute('action') || '';
+
+      // Fallback: if no real endpoint is configured yet, open a pre-filled
+      // email so the button still does something useful.
+      if (!endpoint || endpoint === '#' || endpoint.indexOf('YOUR_FORM_ID') !== -1) {
+        var d = new FormData(form);
+        var subject = 'New inquiry from ' + (d.get('name') || 'website');
+        var body =
+          'Name: '    + (d.get('name')    || '') + '\n' +
+          'Company: ' + (d.get('company') || '') + '\n' +
+          'Email: '   + (d.get('email')   || '') + '\n' +
+          'Phone: '   + (d.get('phone')   || '') + '\n' +
+          'Hiring Needs: ' + (d.get('needs') || '') + '\n\n' +
+          (d.get('message') || '');
+        window.location.href =
+          'mailto:info@rambridgeconsulting.com'
+          + '?subject=' + encodeURIComponent(subject)
+          + '&body='    + encodeURIComponent(body);
+        setStatus('Opening your email app… or configure a form endpoint to send directly.', '');
+        return;
+      }
+
+      // Real submission via fetch — no page reload.
+      var original = btn ? btn.textContent : '';
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+      setStatus('', '');
+
+      fetch(endpoint, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      })
+      .then(function (res) {
+        if (res.ok) {
+          form.reset();
+          setStatus('Thanks — your inquiry has been sent. We\u2019ll reply within one business day.', 'ok');
+        } else {
+          setStatus('Something went wrong. Please email info@rambridgeconsulting.com instead.', 'err');
+        }
+      })
+      .catch(function () {
+        setStatus('Network error. Please email info@rambridgeconsulting.com instead.', 'err');
+      })
+      .finally(function () {
+        if (btn) { btn.disabled = false; btn.textContent = original; }
+      });
+    });
+  }
 })();
