@@ -233,7 +233,14 @@
           • Set action="https://your-handler" method="post" and handle server-side, or
           • In WordPress, paste a Contact Form 7 / WPForms / Fluent Forms shortcode here.
         -->
-        <form class="rb-form rb-reveal" id="rbForm" action="https://formspree.io/f/YOUR_FORM_ID" method="post">
+        <form class="rb-form rb-reveal" id="rbForm" action="https://api.web3forms.com/submit" method="post">
+          <!-- WEB3FORMS: replace the value below with the Access Key emailed to you
+               from https://web3forms.com (it is safe to be public). -->
+          <input type="hidden" name="access_key" value="8182a1a7-978c-4a3f-9623-08c82b106485">
+          <input type="hidden" name="subject" value="New inquiry from RamBridge website">
+          <input type="hidden" name="from_name" value="RamBridge Consulting Website">
+          <!-- Honeypot: hidden from humans; if a bot fills it, Web3Forms rejects the submission. -->
+          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
           <div class="rb-fields">
             <div class="rb-field"><label>Name</label><input type="text" name="name" placeholder="Jane Doe" required></div>
             <div class="rb-field"><label>Company</label><input type="text" name="company" placeholder="Acme Inc."></div>
