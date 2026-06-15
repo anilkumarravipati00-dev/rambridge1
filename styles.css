@@ -1,9 +1,4 @@
-/* ==================================================================
-   RamBridge Consulting — Stylesheet
-   All CSS is scoped under .rb-site and prefixed rb- to avoid clashes.
-   ================================================================== */
 
-/* ============================ TOKENS ============================ */
 .rb-site{
   --navy:#0b1b34; --navy-deep:#060f20; --ink:#0f172a;
   --slate:#475569; --mute:#64748b; --line:#e6ebf2;
@@ -63,11 +58,11 @@
 
 /* ============================ HERO ============================ */
 .rb-hero{position:relative;overflow:hidden;background:
-  radial-gradient(1100px 540px at 80% -10%,rgba(16,184,166,.16),transparent 60%),
-  radial-gradient(900px 500px at 8% 110%,rgba(47,123,245,.14),transparent 55%),
-  linear-gradient(180deg,#fbfdff,#f3f7fc)}
+  radial-gradient(1100px 560px at 100% 0%,rgba(16,184,166,.14),transparent 55%),
+  radial-gradient(900px 520px at 0% 100%,rgba(47,123,245,.08),transparent 55%),
+  linear-gradient(135deg,#FAFBFF,#F2FAFD)}
 .rb-hero::before{content:"";position:absolute;inset:0;opacity:.5;
-  background-image:radial-gradient(rgba(11,27,52,.06) 1px,transparent 1px);background-size:26px 26px;pointer-events:none}
+  background-image:radial-gradient(rgba(15,23,42,.04) 1px,transparent 1px);background-size:22px 22px;pointer-events:none}
 .rb-hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;
   padding:84px 0 96px}
 .rb-hero h1{font-size:clamp(2.3rem,5vw,3.7rem);font-weight:800;margin:20px 0 22px}
