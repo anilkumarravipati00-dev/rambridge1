@@ -279,3 +279,7 @@
   .rb-hero .rb-float--a{right:0;left:auto}
   .rb-hero .rb-float--b{left:0;right:auto}
 }
+
+/* ============== IN-PAGE NAV: smooth scroll + sticky-header offset ============== */
+html{scroll-behavior:smooth}
+.rb-site section[id]{scroll-margin-top:90px}
