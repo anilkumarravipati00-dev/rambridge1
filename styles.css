@@ -1,4 +1,3 @@
-
 .rb-site{
   --navy:#0b1b34; --navy-deep:#060f20; --ink:#0f172a;
   --slate:#475569; --mute:#64748b; --line:#e6ebf2;
@@ -232,3 +231,51 @@
 .rb-site .rb-form-status--ok{color:var(--teal)}
 .rb-site .rb-form-status--err{color:#dc2626}
 .rb-site .rb-form button[disabled]{opacity:.65;cursor:progress;transform:none}
+
+/* ================================================================
+   HERO — DARK THEME (matches image 2)
+   Everything below is scoped to .rb-hero, so the rest of the
+   site keeps its original light styling. Safe to remove to revert.
+   ================================================================ */
+.rb-hero{background:
+  radial-gradient(900px 600px at 80% 12%,rgba(40,120,185,.40),transparent 60%),
+  radial-gradient(700px 460px at 0% 100%,rgba(16,184,166,.10),transparent 55%),
+  linear-gradient(135deg,#0a1c33 0%,#0c2440 45%,#0a1d36 100%)}
+.rb-hero::before{opacity:1;
+  background-image:
+    linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
+  background-size:54px 54px;
+  -webkit-mask-image:radial-gradient(circle at 62% 30%,#000,transparent 75%);
+          mask-image:radial-gradient(circle at 62% 30%,#000,transparent 75%)}
+
+/* text on dark */
+.rb-hero h1{color:#f3f7fb}
+.rb-hero p.rb-lead{color:#9db4cd}
+
+/* eyebrow becomes a bordered pill with an icon */
+.rb-hero .rb-eyebrow--pill{padding:8px 16px;border:1px solid rgba(255,255,255,.16);border-radius:999px;
+  background:rgba(255,255,255,.05);text-transform:none;letter-spacing:.01em;font-size:.82rem;color:#cdddec}
+.rb-hero .rb-eyebrow--pill::before{display:none}
+.rb-hero .rb-eyebrow--pill svg{width:16px;height:16px;color:#10b8a6}
+
+/* buttons on dark */
+.rb-hero .rb-btn svg{width:18px;height:18px}
+.rb-hero .rb-btn--ghost{background:rgba(255,255,255,.05);color:#eaf2fa;border-color:rgba(255,255,255,.18)}
+.rb-hero .rb-btn--ghost:hover{border-color:#10b8a6;color:#10b8a6;background:rgba(255,255,255,.1)}
+
+/* floating badges: glass (top-right) + solid dark (bottom-left) */
+.rb-hero .rb-float{background:transparent;border:0;box-shadow:none}
+.rb-hero .rb-float--a{top:24px;right:18px;left:auto;
+  background:rgba(20,45,72,.55);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:14px 18px;
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.rb-hero .rb-float--b{bottom:30px;left:-18px;right:auto;
+  background:#08182c;border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:14px 18px;
+  box-shadow:0 22px 44px -20px rgba(0,0,0,.8)}
+.rb-hero .rb-float b{color:#fff}
+.rb-hero .rb-float span{color:#7e96b2}
+
+@media(max-width:980px){
+  .rb-hero .rb-float--a{right:0;left:auto}
+  .rb-hero .rb-float--b{left:0;right:auto}
+}
