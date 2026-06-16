@@ -64,7 +64,7 @@
 .rb-hero::before{content:"";position:absolute;inset:0;opacity:.5;
   background-image:radial-gradient(rgba(15,23,42,.04) 1px,transparent 1px);background-size:22px 22px;pointer-events:none}
 .rb-hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;
-  padding:84px 0 96px}
+  padding-top:84px;padding-bottom:96px}
 .rb-hero h1{font-size:clamp(2.3rem,5vw,3.7rem);font-weight:800;margin:20px 0 22px}
 .rb-hero p.rb-lead{font-size:1.16rem;color:var(--slate);max-width:520px;margin-bottom:32px}
 .rb-hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:42px}
@@ -218,7 +218,7 @@
 /* Tablet / small laptop */
 @media(max-width:980px){
   .rb-section{padding:84px 0}
-  .rb-hero-grid{grid-template-columns:1fr;padding:60px 0 76px;gap:42px}
+  .rb-hero-grid{grid-template-columns:1fr;padding-top:60px;padding-bottom:76px;gap:42px}
   .rb-about-grid,.rb-contact-grid{grid-template-columns:1fr;gap:42px}
   .rb-hero-media{order:-1}
   .rb-grid-3,.rb-steps,.rb-quotes{grid-template-columns:1fr 1fr}
@@ -241,10 +241,10 @@
 
 /* Phone */
 @media(max-width:640px){
-  .rb-wrap{padding:0 18px}
+  .rb-wrap{padding:0 22px}
   .rb-section{padding:62px 0}
   .rb-head{margin-bottom:38px}
-  .rb-hero-grid{padding:44px 0 60px}
+  .rb-hero-grid{padding-top:44px;padding-bottom:60px}
   .rb-hero-actions{gap:12px}
   .rb-hero-actions .rb-btn,.rb-cta .rb-hero-actions .rb-btn{width:100%;justify-content:center}
   .rb-grid-3,.rb-steps,.rb-quotes,.rb-ind,.rb-fields{grid-template-columns:1fr}
