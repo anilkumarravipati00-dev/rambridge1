@@ -40,21 +40,21 @@
 
 /* ============================ HEADER ============================ */
 .rb-header{position:sticky;top:0;z-index:60;
-  background:linear-gradient(135deg,#0a1c33,#0c2440 60%,#0a1d36);
-  backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid rgba(255,255,255,.08)}
+  background:rgba(255,255,255,.82);
+  backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid var(--line)}
 .rb-nav{display:flex;align-items:center;justify-content:space-between;height:74px}
-.rb-logo{display:flex;align-items:center;gap:11px;font-family:'Sora';font-weight:700;color:#fff;font-size:1.06rem}
+.rb-logo{display:flex;align-items:center;gap:11px;font-family:'Sora';font-weight:700;color:var(--navy);font-size:1.06rem}
 .rb-logo .rb-mark{width:38px;height:38px;border-radius:11px;background:var(--grad);display:grid;place-items:center;
   color:#fff;font-weight:800;box-shadow:0 10px 22px -10px var(--glow)}
 .rb-logo small{display:block;font-family:'Manrope';font-weight:600;font-size:.62rem;letter-spacing:.22em;
-  text-transform:uppercase;color:#9fb0c6;margin-top:1px}
+  text-transform:uppercase;color:var(--mute);margin-top:1px}
 .rb-menu{display:flex;align-items:center;gap:30px}
-.rb-menu a{font-weight:600;font-size:.93rem;color:#cdd7e6;position:relative;padding:4px 0}
+.rb-menu a{font-weight:600;font-size:.93rem;color:var(--slate);position:relative;padding:4px 0}
 .rb-menu a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--grad);transition:width .25s}
-.rb-menu a:hover{color:#fff}.rb-menu a:hover::after{width:100%}
+.rb-menu a:hover{color:var(--navy)}.rb-menu a:hover::after{width:100%}
 .rb-nav-cta{display:flex;align-items:center;gap:14px}
 .rb-burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
-.rb-burger span{width:24px;height:2px;background:#fff;border-radius:2px;transition:.3s}
+.rb-burger span{width:24px;height:2px;background:var(--navy);border-radius:2px;transition:.3s}
 
 /* ============================ HERO ============================ */
 .rb-hero{position:relative;overflow:hidden;background:
@@ -220,7 +220,6 @@
   .rb-section{padding:84px 0}
   .rb-hero-grid{grid-template-columns:1fr;padding-top:60px;padding-bottom:76px;gap:42px}
   .rb-about-grid,.rb-contact-grid{grid-template-columns:1fr;gap:42px}
-  .rb-hero-media{order:-1}
   .rb-grid-3,.rb-steps,.rb-quotes{grid-template-columns:1fr 1fr}
   .rb-ind{grid-template-columns:repeat(3,1fr)}
   .rb-stats-grid{grid-template-columns:1fr 1fr}
@@ -231,8 +230,8 @@
 /* Collapse nav to a burger before the links get cramped */
 @media(max-width:860px){
   .rb-menu{position:fixed;inset:74px 0 auto 0;flex-direction:column;align-items:flex-start;
-    background:#0a1d36;padding:18px 24px;gap:4px;
-    border-bottom:1px solid rgba(255,255,255,.08);transform:translateY(-135%);transition:.35s;box-shadow:var(--shadow)}
+    background:#fff;padding:18px 24px;gap:4px;
+    border-bottom:1px solid var(--line);transform:translateY(-135%);transition:.35s;box-shadow:var(--shadow)}
   .rb-menu a{width:100%;padding:13px 0}
   .rb-menu.rb-open{transform:none}
   .rb-burger{display:flex}
@@ -306,6 +305,16 @@
 .rb-hero .rb-btn--ghost{background:rgba(255,255,255,.05);color:#eaf2fa;border-color:rgba(255,255,255,.18)}
 .rb-hero .rb-btn--ghost:hover{border-color:#10b8a6;color:#10b8a6;background:rgba(255,255,255,.1)}
 
+/* hero stat strip (matches reference) */
+.rb-hero .rb-hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px;max-width:560px}
+.rb-hero .rb-hero-stats div{position:static;padding:16px;border-radius:14px;text-align:left;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.rb-hero .rb-hero-stats div::before{display:none}
+.rb-hero .rb-hero-stats svg{width:22px;height:22px;color:var(--teal);margin-bottom:10px}
+.rb-hero .rb-hero-stats b{font-family:'Sora';font-weight:700;font-size:1.1rem;color:#fff;display:block}
+.rb-hero .rb-hero-stats span{font-size:.78rem;color:#9db4cd;font-weight:600}
+
 /* floating badges: glass (top-right) + solid dark (bottom-left) */
 .rb-hero .rb-float{background:transparent;border:0;box-shadow:none}
 .rb-hero .rb-float--a{top:24px;right:18px;left:auto;
@@ -326,6 +335,11 @@
   .rb-hero .rb-float b{font-size:1.05rem}
   .rb-hero .rb-float--a{top:12px;right:10px}
   .rb-hero .rb-float--b{bottom:12px;left:10px}
+  .rb-hero .rb-hero-stats{gap:10px;margin-top:2px}
+  .rb-hero .rb-hero-stats div{padding:13px 11px}
+  .rb-hero .rb-hero-stats svg{width:20px;height:20px;margin-bottom:7px}
+  .rb-hero .rb-hero-stats b{font-size:.95rem}
+  .rb-hero .rb-hero-stats span{font-size:.69rem}
 }
 
 /* ============== IN-PAGE NAV: smooth scroll + sticky-header offset ============== */
