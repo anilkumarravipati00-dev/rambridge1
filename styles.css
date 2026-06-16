@@ -205,6 +205,14 @@
 /* ============================ REVEAL ANIM ============================ */
 .rb-reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
 .rb-reveal.rb-in{opacity:1;transform:none}
+/* Fallback: never keep content hidden when the scroll trigger can't run —
+   i.e. when printing / exporting to PDF, or when reduced motion is on. */
+@media print{
+  .rb-reveal{opacity:1!important;transform:none!important}
+}
+@media (prefers-reduced-motion:reduce){
+  .rb-reveal{opacity:1!important;transform:none!important;transition:none}
+}
 
 /* ============================ RESPONSIVE ============================ */
 /* Tablet / small laptop */
