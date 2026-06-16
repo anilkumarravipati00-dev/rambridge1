@@ -207,24 +207,57 @@
 .rb-reveal.rb-in{opacity:1;transform:none}
 
 /* ============================ RESPONSIVE ============================ */
+/* Tablet / small laptop */
 @media(max-width:980px){
-  .rb-hero-grid,.rb-about-grid,.rb-contact-grid{grid-template-columns:1fr}
+  .rb-section{padding:84px 0}
+  .rb-hero-grid{grid-template-columns:1fr;padding:60px 0 76px;gap:42px}
+  .rb-about-grid,.rb-contact-grid{grid-template-columns:1fr;gap:42px}
   .rb-hero-media{order:-1}
   .rb-grid-3,.rb-steps,.rb-quotes{grid-template-columns:1fr 1fr}
   .rb-ind{grid-template-columns:repeat(3,1fr)}
   .rb-stats-grid{grid-template-columns:1fr 1fr}
-  .rb-foot-grid{grid-template-columns:1fr 1fr;gap:30px}
+  .rb-foot-grid{grid-template-columns:1.4fr 1fr 1fr;gap:30px}
   .rb-float--a{left:0}.rb-float--b{right:0}
 }
-@media(max-width:640px){
-  .rb-section{padding:72px 0}
-  .rb-menu{position:fixed;inset:74px 0 auto 0;flex-direction:column;background:#0a1d36;padding:22px 24px;gap:16px;
-    border-bottom:1px solid rgba(255,255,255,.08);transform:translateY(-130%);transition:.35s;box-shadow:var(--shadow)}
+
+/* Collapse nav to a burger before the links get cramped */
+@media(max-width:860px){
+  .rb-menu{position:fixed;inset:74px 0 auto 0;flex-direction:column;align-items:flex-start;
+    background:#0a1d36;padding:18px 24px;gap:4px;
+    border-bottom:1px solid rgba(255,255,255,.08);transform:translateY(-135%);transition:.35s;box-shadow:var(--shadow)}
+  .rb-menu a{width:100%;padding:13px 0}
   .rb-menu.rb-open{transform:none}
   .rb-burger{display:flex}
   .rb-nav-cta .rb-btn{display:none}
+}
+
+/* Phone */
+@media(max-width:640px){
+  .rb-wrap{padding:0 18px}
+  .rb-section{padding:62px 0}
+  .rb-head{margin-bottom:38px}
+  .rb-hero-grid{padding:44px 0 60px}
+  .rb-hero-actions{gap:12px}
+  .rb-hero-actions .rb-btn,.rb-cta .rb-hero-actions .rb-btn{width:100%;justify-content:center}
   .rb-grid-3,.rb-steps,.rb-quotes,.rb-ind,.rb-fields{grid-template-columns:1fr}
-  .rb-hero-media img{height:340px}
+  .rb-stats-grid{grid-template-columns:1fr 1fr;gap:22px}
+  .rb-hero-media img{height:300px}
+  .rb-card,.rb-step,.rb-info-card{padding:24px}
+  .rb-about-art{padding:28px}
+  .rb-form{padding:24px}
+  .rb-fields{gap:14px}
+  /* 16px inputs stop iOS Safari auto-zooming on focus */
+  .rb-field input,.rb-field select,.rb-field textarea{font-size:16px}
+  .rb-foot-grid{grid-template-columns:1fr 1fr;gap:26px}
+  .rb-foot-brand{grid-column:1/-1}
+  .rb-foot-bottom{flex-direction:column;align-items:flex-start;gap:8px}
+}
+
+/* Small phone */
+@media(max-width:400px){
+  .rb-hero h1{font-size:clamp(1.9rem,8.5vw,2.4rem)}
+  .rb-stats-grid{grid-template-columns:1fr}
+  .rb-foot-grid{grid-template-columns:1fr}
 }
 
 /* ====================== CONTACT FORM STATUS ====================== */
@@ -279,6 +312,12 @@
 @media(max-width:980px){
   .rb-hero .rb-float--a{right:0;left:auto}
   .rb-hero .rb-float--b{left:0;right:auto}
+}
+@media(max-width:640px){
+  .rb-hero .rb-float{padding:10px 14px}
+  .rb-hero .rb-float b{font-size:1.05rem}
+  .rb-hero .rb-float--a{top:12px;right:10px}
+  .rb-hero .rb-float--b{bottom:12px;left:10px}
 }
 
 /* ============== IN-PAGE NAV: smooth scroll + sticky-header offset ============== */
