@@ -9,7 +9,7 @@
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
 <!-- Styles -->
 <link rel="stylesheet" href="styles.css">
@@ -21,6 +21,55 @@
   .rb-logo-img{height:46px;width:auto;display:block}
   .rb-logo-img--foot{height:42px}
   @media(max-width:640px){.rb-logo-img{height:38px}}
+
+  /* ---- Contact form (integrated; namespaced under .rbf so it never
+          collides with the site's own .rb-* form styles) ---- */
+  .rbf{
+    --navy:#0b1426; --navy-2:#101c34; --line:rgba(255,255,255,.10);
+    --teal:#10b8a6; --teal-2:#3ddc97; --ink:#e8eef7; --muted:#9fb0c8;
+    --grad:linear-gradient(135deg,#10b8a6,#3ddc97);
+    font-family:"Manrope",system-ui,sans-serif; color:var(--ink);
+    background:var(--navy); border:1px solid var(--line);
+    border-radius:22px; padding:clamp(22px,4vw,36px);
+    box-shadow:0 24px 60px -28px rgba(0,0,0,.55);
+  }
+  .rbf *{box-sizing:border-box}
+  .rbf-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  .rbf-field{display:flex; flex-direction:column; gap:7px}
+  .rbf-full{grid-column:1 / -1}
+  .rbf label{
+    font-family:"Space Mono",monospace; font-size:.72rem; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--muted);
+  }
+  .rbf label .req{color:var(--teal)}
+  .rbf input,.rbf select,.rbf textarea{
+    width:100%; font:inherit; color:var(--ink);
+    background:var(--navy-2); border:1px solid var(--line);
+    border-radius:12px; padding:13px 14px; transition:border-color .18s, box-shadow .18s;
+  }
+  .rbf textarea{min-height:130px; resize:vertical}
+  .rbf select{appearance:none; cursor:pointer;
+    background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);
+    background-position:calc(100% - 20px) 55%,calc(100% - 14px) 55%;
+    background-size:6px 6px,6px 6px; background-repeat:no-repeat; padding-right:40px;
+  }
+  .rbf input::placeholder,.rbf textarea::placeholder{color:#647593}
+  .rbf input:focus,.rbf select:focus,.rbf textarea:focus{
+    outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(16,184,166,.18);
+  }
+  .rbf-btn{
+    margin-top:22px; width:100%; cursor:pointer; border:0;
+    font-family:"Sora",sans-serif; font-weight:700; font-size:1rem; color:#03201c;
+    background:var(--grad); border-radius:12px; padding:15px 20px;
+    transition:transform .15s, filter .15s;
+  }
+  .rbf-btn:hover{transform:translateY(-1px); filter:brightness(1.05)}
+  .rbf-btn:disabled{opacity:.6; cursor:progress; transform:none}
+  .rbf-status{min-height:1.2em; margin:14px 0 0; font-size:.92rem; text-align:center}
+  .rbf-status.ok{color:var(--teal-2)}
+  .rbf-status.err{color:#ff8b8b}
+  @media(max-width:560px){ .rbf-grid{grid-template-columns:1fr} }
+  @media(prefers-reduced-motion:reduce){ .rbf-btn{transition:none} }
 </style>
 </head>
 <body>
@@ -228,34 +277,54 @@
       </div>
       <div class="rb-contact-grid">
         <!--
-          FORM WIRING: This is styled markup only. To make it send:
-          • Set action="https://your-handler" method="post" and handle server-side, or
-          • In WordPress, paste a Contact Form 7 / WPForms / Fluent Forms shortcode here.
+          Contact form — posts to Web3Forms.
+          To change where submissions go, swap the access_key value with the key
+          emailed to you from https://web3forms.com (safe to be public).
         -->
-        <form class="rb-form rb-reveal" id="rbForm" action="https://api.web3forms.com/submit" method="post">
-          <!-- WEB3FORMS: replace the value below with the Access Key emailed to you
-               from https://web3forms.com (it is safe to be public). -->
+        <form class="rbf rb-reveal" id="rbForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
+          <!-- Web3Forms config -->
           <input type="hidden" name="access_key" value="4008718d-28e2-455f-b35e-ded7d5977dbb">
           <input type="hidden" name="subject" value="New inquiry from RamBridge website">
           <input type="hidden" name="from_name" value="RamBridge Consulting Website">
-          <!-- Honeypot: hidden from humans; if a bot fills it, Web3Forms rejects the submission. -->
+          <!-- Honeypot: hidden from people; bots that fill it get rejected -->
           <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
-          <div class="rb-fields">
-            <div class="rb-field"><label>Name</label><input type="text" name="name" placeholder="Jane Doe" required></div>
-            <div class="rb-field"><label>Company</label><input type="text" name="company" placeholder="Acme Inc."></div>
-            <div class="rb-field"><label>Email</label><input type="email" name="email" placeholder="jane@company.com" required></div>
-            <div class="rb-field"><label>Phone</label><input type="tel" name="phone" placeholder="+1 (___) ___-____"></div>
-            <div class="rb-field rb-full"><label>Hiring Needs</label>
-              <select name="needs">
-                <option>IT Contract Staffing</option><option>Direct Hire Recruitment</option>
-                <option>Contract-to-Hire</option><option>Managed Staffing Services</option>
-                <option>Remote &amp; Hybrid Workforce</option><option>Project-Based Augmentation</option>
+
+          <div class="rbf-grid">
+            <div class="rbf-field">
+              <label for="rbf-name">Name <span class="req">*</span></label>
+              <input id="rbf-name" type="text" name="name" placeholder="Jane Doe" required>
+            </div>
+            <div class="rbf-field">
+              <label for="rbf-company">Company</label>
+              <input id="rbf-company" type="text" name="company" placeholder="Acme Inc.">
+            </div>
+            <div class="rbf-field">
+              <label for="rbf-email">Email <span class="req">*</span></label>
+              <input id="rbf-email" type="email" name="email" placeholder="jane@company.com" required>
+            </div>
+            <div class="rbf-field">
+              <label for="rbf-phone">Phone</label>
+              <input id="rbf-phone" type="tel" name="phone" placeholder="+1 (___) ___-____">
+            </div>
+            <div class="rbf-field rbf-full">
+              <label for="rbf-needs">Hiring needs</label>
+              <select id="rbf-needs" name="needs">
+                <option>IT Contract Staffing</option>
+                <option>Direct Hire Recruitment</option>
+                <option>Contract-to-Hire</option>
+                <option>Managed Staffing Services</option>
+                <option>Remote &amp; Hybrid Workforce</option>
+                <option>Project-Based Augmentation</option>
               </select>
             </div>
-            <div class="rb-field rb-full"><label>Message</label><textarea name="message" placeholder="Tell us about the roles, stack, and timeline…"></textarea></div>
+            <div class="rbf-field rbf-full">
+              <label for="rbf-message">Message <span class="req">*</span></label>
+              <textarea id="rbf-message" name="message" placeholder="Tell us about the roles, stack, and timeline…" required></textarea>
+            </div>
           </div>
-          <button type="submit" class="rb-btn rb-btn--primary">Send Inquiry →</button>
-          <p class="rb-form-status" id="rbFormStatus" role="status" aria-live="polite"></p>
+
+          <button type="submit" class="rbf-btn" id="rbfBtn">Send inquiry →</button>
+          <p class="rbf-status" id="rbfStatus" role="status" aria-live="polite"></p>
         </form>
         <div class="rb-info rb-reveal">
           <div class="rb-info-card"><div class="rb-card-ico">&#128231;</div><div><b>Email</b><a href="mailto:info@rambridgeconsulting.com">info@rambridgeconsulting.com</a></div></div>
@@ -293,6 +362,55 @@
   </footer>
 
 </div>
+
+<!-- Contact form submit handling (AJAX to Web3Forms with inline status) -->
+<script>
+  (function(){
+    var form = document.getElementById('rbForm');
+    if(!form) return;
+    var btn  = document.getElementById('rbfBtn');
+    var note = document.getElementById('rbfStatus');
+
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      note.className = 'rbf-status';
+      note.textContent = '';
+
+      if(!form.checkValidity()){
+        note.className = 'rbf-status err';
+        note.textContent = 'Please add your name, a valid email, and a message.';
+        form.reportValidity();
+        return;
+      }
+
+      btn.disabled = true;
+      var label = btn.textContent;
+      btn.textContent = 'Sending…';
+
+      try{
+        var res = await fetch(form.action, {
+          method:'POST',
+          headers:{'Accept':'application/json'},
+          body:new FormData(form)
+        });
+        var data = await res.json();
+        if(data.success){
+          note.className = 'rbf-status ok';
+          note.textContent = 'Thanks — we\u2019ll be in touch within one business day.';
+          form.reset();
+        }else{
+          throw new Error(data.message || 'Submission failed');
+        }
+      }catch(err){
+        note.className = 'rbf-status err';
+        note.textContent = 'Something went wrong. Email info@rambridgeconsulting.com and we\u2019ll pick it up.';
+      }finally{
+        btn.disabled = false;
+        btn.textContent = label;
+      }
+    });
+  })();
+</script>
 
 <!-- Scripts -->
 <script src="script.js"></script>
