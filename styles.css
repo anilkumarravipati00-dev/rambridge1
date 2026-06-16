@@ -282,5 +282,6 @@
 }
 
 /* ============== IN-PAGE NAV: smooth scroll + sticky-header offset ============== */
+html,body{margin:0;padding:0;background:#0a1c33}
 html{scroll-behavior:smooth}
 .rb-site section[id]{scroll-margin-top:90px}
